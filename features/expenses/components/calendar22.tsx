@@ -18,6 +18,9 @@ export function Calendar22() {
 
   return (
     <div className="flex flex-col gap-3">
+      {/* fecha que se envia al servidor para guardarla en la base de datos */}
+      <input type="hidden" name="expense-date" value={date ? date.toISOString() : ''} />
+
       <Label htmlFor="date" className="px-1">
         Date
       </Label>

@@ -13,7 +13,7 @@ export async function createCategory(formData: FormData) {
   }
 
   const categoryData: CreateCategoryInput = {
-    name: rawName.trim().replace(/\s+g/, '_')
+    name: rawName.trim().replace(/\s+/g, '_')
   }
 
   // Supabase + user
@@ -40,7 +40,7 @@ export async function createCategory(formData: FormData) {
   const month = date.getMonth() + 1 // Porque va de 0 a 11, siendo 0=1 y asi consecutivamente
   const year = date.getFullYear()
 
-  const rawMonthlyLimit = formData.get('catogory-amount')
+  const rawMonthlyLimit = formData.get('category-amount')
   if (typeof rawMonthlyLimit !== 'string' || isNaN(Number(rawMonthlyLimit))) {
     throw new Error('Invalid monthly limit')
   }
@@ -55,7 +55,7 @@ export async function createCategory(formData: FormData) {
   }
 
   // Insert budget
-  const { error: budgetError } = await supabase.from('budget').insert({
+  const { error: budgetError } = await supabase.from('budgets').insert({
     user_id: authData.user.id,
     ...budgetData
   })

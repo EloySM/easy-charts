@@ -15,34 +15,25 @@ import {
   InputGroupText,
 } from "@/components/ui/input-group"
 import { Textarea } from "@/components/ui/textarea"
-import { Calendar22 } from "../../../components/calendar-22"
+import { Calendar22 } from "./calendar22"
 import Link from "next/link"
-import { redirect } from "next/navigation"
 import { NativeSelect, NativeSelectOption } from "../../../components/ui/native-select"
+import { supabaseServer } from "@/lib/supabase/server"
+import createExpense from "../services/create-expense"
 
-async function createExpense(formData: FormData) {
-  "use server"
+export default async function FieldExpense() {
   
-  const data = {
-    amount: formData.get('expense-amount'),
-    category: formData.get('expense-category'),
-    name: formData.get('expense-name'),
-    date: formData.get('expense-date'),
-    comment: formData.get('expense-comment')
-  }
-  
-  console.log(data)
-  
-  // Aquí iría tu lógica de guardado
-  // await db.expense.create({ data })
-  
-  redirect('/')
-}
+  const supabase = await supabaseServer()
 
-export function FieldExpense() {
-  // Aquí deberías obtener las categorías de tu base de datos
-  // const categories = await db.category.findMany()
-  
+  const { data: categories, error } = await supabase
+    .from("categories")
+    .select("id, name")
+    .eq("is_active", true)
+    .order("name")
+
+  if (error) {
+    throw new Error(error.message)
+  }  
 
   return (
     <div className="w-full max-w-md mx-auto">
@@ -85,12 +76,17 @@ export function FieldExpense() {
                   Select a spending category
                 </FieldDescription>
 
-                <NativeSelect>
-                  <NativeSelectOption value="">Select status</NativeSelectOption>
-                  <NativeSelectOption value="todo">Todo</NativeSelectOption>
-                  <NativeSelectOption value="in-progress">In Progress</NativeSelectOption>
-                  <NativeSelectOption value="done">Done</NativeSelectOption>
-                  <NativeSelectOption value="cancelled">Cancelled</NativeSelectOption>
+                <NativeSelect name="expense-category">
+                  <NativeSelectOption value="">Select category</NativeSelectOption>
+
+                  {categories.map((category) => (
+                    <NativeSelectOption
+                      key={category.id} 
+                      value={category.id}
+                    >
+                      {category.name.replace(/_/g, ' ')}
+                    </NativeSelectOption>
+                  ))}
                 </NativeSelect>
 
               </Field>
@@ -103,8 +99,8 @@ export function FieldExpense() {
                   Brief description of the expense
                 </FieldDescription>
                 <Input
-                  id="expense-name"
-                  name="expense-name"
+                  id="expense-description"
+                  name="expense-description"
                   placeholder="Lunch at restaurant"
                   required
                   autoComplete="off"

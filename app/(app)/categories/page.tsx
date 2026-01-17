@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { CirclePlus } from "lucide-react";
 import Link from "next/link";
+import CategoriesCard from "@/features/categories/components/categories-card";
 
 export default function Page() {
 
@@ -11,15 +12,17 @@ export default function Page() {
       <Link 
       href='/categories/new-category' 
       className='w-full flex justify-end'>
-      <Button
+        <Button
         variant="default"
         size="sm"
         className="font-semibold px-4"
-      >
-        <CirclePlus className='' />
+        >
+          <CirclePlus className='' />
           Create category
-      </Button>
-    </Link>
+        </Button>
+      </Link>
+
+      <CategoriesCard/>
     </div>
   )
 }

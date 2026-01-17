@@ -1,4 +1,4 @@
-import { FieldExpense } from "@/features/expenses/components/field-expense";
+import FieldExpense from "@/features/expenses/components/field-expense";
 import { Card } from "@/components/ui/card";
 
 export default function Page() {
