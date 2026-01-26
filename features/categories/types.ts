@@ -17,3 +17,15 @@ export type CreateCategoryInput = {
 export type CategoryIdRow = {
   id: string
 }
+
+export type CategoryRowData = {
+  id: string
+  name: string
+}
+
+export type CategoryCardData = {
+  id: string
+  name: string
+  monthly_limit: number
+  spent: number
+}

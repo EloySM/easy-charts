@@ -71,7 +71,7 @@ export function FieldCategory() {
             <Button className="w-full" type="submit">
               Create Category
             </Button>
-            <Link href="/">
+            <Link href="/categories">
               <Button className="w-full" variant="outline" type="button">
                 Cancel
               </Button>

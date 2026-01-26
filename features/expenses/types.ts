@@ -17,3 +17,12 @@ export type CreateExpenseInput = {
   date: string;
   additional_notes?: string;
 };
+
+export type ExpenseRowData = {
+  id: string
+  description: string
+  amount: number
+  date: string
+  additional_notes: string  | null
+  categories: { name: string} | null
+}

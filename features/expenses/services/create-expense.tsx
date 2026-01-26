@@ -39,7 +39,7 @@ export default async function createExpense(formData: FormData) {
     user_id: authData.user.id,
     category_id: categoryId,
     amount,
-    description: description.trim(),
+    description: description.trim().replace(/\s+/g, '_'),
     date,
     additional_notes: typeof comment === 'string' && comment.trim() !== '' ? comment : null
   })

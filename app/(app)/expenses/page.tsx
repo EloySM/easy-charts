@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import Link from "next/link";
+import { ExpenseList } from "@/features/expenses/components/expenses-list";
 
 export default function Page() {
 
@@ -20,6 +21,8 @@ export default function Page() {
           Add expense
       </Button>
     </Link>
+
+    <ExpenseList />
     </div>
   )
 }

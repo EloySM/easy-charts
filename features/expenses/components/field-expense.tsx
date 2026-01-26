@@ -137,7 +137,7 @@ export default async function FieldExpense() {
             <Button className="w-full" type="submit">
               Add Expense
             </Button>
-            <Link href="/">
+            <Link href="/expenses">
               <Button className="w-full" variant="outline" type="button">
                 Cancel
               </Button>
