@@ -1,6 +1,6 @@
 import { ChartAreaGradient } from "@/components/chart-area-gradient";
 import { ChartAreaInteractive } from "@/components/chart-area-interactive";
-import { ChartPieDonutText } from '@/components/chart-pie-donut-text'
+import { ChartPieDonutText } from '@/features/home/components/chart-pie-donut-text'
 
 export default function Page() {
   return (

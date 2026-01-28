@@ -3,6 +3,7 @@ import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/comp
 import { IconCash, IconEdit, IconAlertTriangle, IconCircleCheck, IconTargetArrow } from "@tabler/icons-react";
 import Link from "next/link";
 import { CategoryCardData } from "../types";
+import { Separator } from "@/components/ui/separator"
 
 interface CategoryCardProps {
   category: CategoryCardData
@@ -10,8 +11,8 @@ interface CategoryCardProps {
 
 export default function CategoryCard({ category } : CategoryCardProps) {
   const remaining = category.monthly_limit - category.spent
-  const over = remaining < 0
-  const exact = remaining === 0 // El nuevo estado de precisión
+  const over = remaining < 0  // Si el el dinero restante es menor que 0
+  const exact = remaining === 0 // Si el dinero restante es igual a 0
 
   return (
     <Card className="flex flex-col justify-between transition hover:shadow-md">
@@ -54,14 +55,15 @@ export default function CategoryCard({ category } : CategoryCardProps) {
         <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
           <div 
             className={`h-full transition-all ${
-              exact ? "bg-blue-500" : over ? "bg-red-500" : "bg-primary"
+              exact ? "bg-blue-500" : over ? "bg-red-500" : "bg-emerald-500"
             }`} 
-            style={{ width: `${Math.min((category.spent / category.monthly_limit) * 100, 100)}%` }}
+            style={{ width: `${Math.min((category.spent / category.monthly_limit) * 100, 100)}%` }}   // Se pone Math.min y al final ,100 porque si lo gastado se sale del presupuesto entonces solo mostrará la barra llena y no se saldrá del div
           />
         </div>
       </div>
 
-      <CardFooter className="border-t bg-muted/30 py-3 flex items-center justify-between text-xs text-muted-foreground">
+      <Separator />
+      <CardFooter className="py-3 flex items-center justify-between text-xs text-muted-foreground">
         <div className="flex items-center gap-2 font-medium">
           {exact ? (
             <>
@@ -71,11 +73,11 @@ export default function CategoryCard({ category } : CategoryCardProps) {
           ) : over ? (
             <>
               <IconAlertTriangle className="size-4 text-red-500" />
-              <span className="text-red-600">${Math.abs(remaining).toFixed(2)} over</span>
+              <span className="text-red-600">${Math.abs(remaining).toFixed(2)} over</span>  {/* Para que no salga en negativo*/}
             </>
           ) : (
             <>
-              <IconCircleCheck className="size-4 text-emerald-500" />
+              <IconCircleCheck className="size-4 text-emerald-600" />
               <span className="text-emerald-600">${remaining.toFixed(2)} left</span>
             </>
           )}
