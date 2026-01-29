@@ -21,7 +21,7 @@ export default function ExpenseCard({ expense }: { expense: ExpenseRowData }) {
         <div className="flex items-start justify-between">
           <div>
             <CardTitle className="text-base font-semibold">
-              {expense.description}
+              {expense.description.replace(/_/g, ' ')}
             </CardTitle>
             {/* 2. Mostramos el nombre procesado */}
             <Badge variant="secondary" className="bg-blue-100 text-blue-700 hover:bg-blue-100">

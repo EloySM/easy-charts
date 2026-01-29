@@ -13,8 +13,8 @@ export default function Page() {
       <div 
         className="grid md:grid-cols-2 gap-10 my-8 grid-cols-1"
       >
-        <ChartPieDonutText />
-        <ChartPieDonutText />
+        {/* <ChartPieDonutText />
+        <ChartPieDonutText /> */}
       </div>
       <ChartAreaGradient />
     </div>

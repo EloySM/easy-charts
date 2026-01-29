@@ -13,7 +13,6 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
@@ -22,18 +21,6 @@ import {
 type PieRow = { label: string, value: number }
 
 export const description = "A donut chart with text"
-
-// const chartData = [
-//   { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-//   { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-//   { browser: "firefox", visitors: 287, fill: "var(--color-firefox)" },
-//   { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-//   { browser: "other", visitors: 190, fill: "var(--color-other)" },
-// ]
-
-
-
-// const chartConfig = {
 //   visitors: {
 //     label: "Visitors",
 //   },
@@ -60,14 +47,11 @@ export const description = "A donut chart with text"
 // } satisfies ChartConfig
 
 export function ChartPieDonutText({ data }: { data: PieRow[] }) {
+  // Esto se utiliza para sumar todos los expenses que lleguen y mostrarlos en en centro del donut
   const totalExpenses = React.useMemo(
-    () => data.reduce((acc, curr) => acc + curr.value, 0),
+    () => data.reduce((acc, curr) => acc + curr.value, 0),  // El 0 del final es el valor inicial
     [data]
   )
-
-  // const totalVisitors = React.useMemo(() => {
-  //   return chartData.reduce((acc, curr) => acc + curr.visitors, 0)
-  // }, [])
 
   const chartConfig = React.useMemo(() => {
     const cfg: Record<string, { label: string }> = {}
@@ -80,7 +64,7 @@ export function ChartPieDonutText({ data }: { data: PieRow[] }) {
     name: d.label,
     value: d.value,
     key: d.label,
-    fill: `var(--chart-${(index % 8) + 1})`, // Usa los colores predefinidos
+    fill: `var(--chart-${(index % 7) + 1})`, // Usa los colores predefinidos
   }))
 
   return (
