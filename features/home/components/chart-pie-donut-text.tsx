@@ -21,30 +21,6 @@ import {
 type PieRow = { label: string, value: number }
 
 export const description = "A donut chart with text"
-//   visitors: {
-//     label: "Visitors",
-//   },
-//   chrome: {
-//     label: "Chrome",
-//     color: "var(--chart-1)",
-//   },
-//   safari: {
-//     label: "Safari",
-//     color: "var(--chart-2)",
-//   },
-//   firefox: {
-//     label: "Firefox",
-//     color: "var(--chart-3)",
-//   },
-//   edge: {
-//     label: "Edge",
-//     color: "var(--chart-4)",
-//   },
-//   other: {
-//     label: "Other",
-//     color: "var(--chart-5)",
-//   },
-// } satisfies ChartConfig
 
 export function ChartPieDonutText({ data }: { data: PieRow[] }) {
   // Esto se utiliza para sumar todos los expenses que lleguen y mostrarlos en en centro del donut
@@ -63,7 +39,6 @@ export function ChartPieDonutText({ data }: { data: PieRow[] }) {
   const chartData = data.map((d, index) => ({
     name: d.label,
     value: d.value,
-    key: d.label,
     fill: `var(--chart-${(index % 7) + 1})`, // Usa los colores predefinidos
   }))
 

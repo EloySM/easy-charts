@@ -1,3 +1,5 @@
+'use client'
+
 import { Calendar, Home, Banknote, Blocks, ChartPie, Search, Settings, User2, ChevronUp } from "lucide-react"
 
 import {
@@ -18,6 +20,7 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 import Link from "next/link"
 import { supabaseServer } from "@/lib/supabase/server"
 import { createServer } from "http"
+import { usePathname } from "next/navigation"
 
 // Menu items.
 const items = [
@@ -58,21 +61,11 @@ const items = [
   },
 ]
 
-export async function AppSidebar() {
+type User = { name: string; email: string; avatar: string }
 
-  const supabase = await supabaseServer()
-  const { data: { user } } = await supabase.auth.getUser()
+export function AppSidebar({ user }: {user: User}) {
 
-  const userName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'No Username'
-  const userEmail = user?.email || ''
-
-  const data = {
-    user: {
-      name: userName,
-      email: userEmail,
-      avatar: "https://github.com/shadcn.png",
-    }
-  }
+  const pathname = usePathname()
 
   return (
     <Sidebar>
@@ -83,7 +76,7 @@ export async function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton asChild isActive={pathname === item.url}>
                     <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
@@ -95,7 +88,7 @@ export async function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <NavUser user={data.user} />
+      <NavUser user={user} />
       {/* <SidebarFooter>
           <SidebarMenu>
             <SidebarMenuItem>

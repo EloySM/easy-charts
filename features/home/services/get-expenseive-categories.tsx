@@ -8,11 +8,11 @@ type TopCategoryRow = {
   value: number
 }
 
-export default async function getTopCategoriesWithOthers(top = 7, period: 'month' | 'year' = 'month'): Promise<PieRow[]> {
+export default async function getTopCategoriesWithOthers(top = 5, period: 'month' | 'year' = 'month'): Promise<PieRow[]> {
 
   const supabase = await supabaseServer()
   const date = new Date()
-  
+
   // Si pedimos 'year', enviamos un 0 al p_month de la base de datos
   // Lógica: Si el periodo es 'year', mandamos 0 (que en SQL tratará como "todos los meses")
   // Si es 'month', mandamos el mes actual (1-12)
