@@ -22,7 +22,7 @@ type PieRow = { label: string, value: number }
 
 export const description = "A donut chart with text"
 
-export function ChartPieDonutText({ data }: { data: PieRow[] }) {
+export function ChartPieDonutText({ data, period}: { data: PieRow[], period: string}) {
   // Esto se utiliza para sumar todos los expenses que lleguen y mostrarlos en en centro del donut
   const totalExpenses = React.useMemo(
     () => data.reduce((acc, curr) => acc + curr.value, 0),  // El 0 del final es el valor inicial
@@ -42,11 +42,15 @@ export function ChartPieDonutText({ data }: { data: PieRow[] }) {
     fill: `var(--chart-${(index % 7) + 1})`, // Usa los colores predefinidos
   }))
 
+  const date = new Date()
+  const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(date)
+  const year = date.getFullYear()
+
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Pie Chart - Donut with Text</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>{ period === 'year' ? 'Last Year' : 'Last Month' }</CardTitle>
+        <CardDescription>{ period === 'year' ?  year : `${month}, ${year}` }</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -87,7 +91,7 @@ export function ChartPieDonutText({ data }: { data: PieRow[] }) {
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Gastos totales
+                          Total Expenses
                         </tspan>
                       </text>
                     )
@@ -98,14 +102,14 @@ export function ChartPieDonutText({ data }: { data: PieRow[] }) {
           </PieChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
+      {/* <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
         </div>
         <div className="text-muted-foreground leading-none">
           Showing total visitors for the last 6 months
         </div>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
   )
 }

@@ -33,8 +33,8 @@ export default async function Page() {
       <div
         className='w-full grid md:grid-cols-2 gap-10 mt-8 grid-cols-1'
       >
-        <ChartPieDonutText data={dataMensual}/>
-        <ChartPieDonutText data={dataAnual}/>
+        <ChartPieDonutText data={dataAnual} period={'year'} />
+        <ChartPieDonutText data={dataMensual} period={'month'} />
       </div>
         <DataTableDemo/>    
 
