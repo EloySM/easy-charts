@@ -1,6 +1,6 @@
 'use client'
 
-import { Calendar, Home, Banknote, Blocks, ChartPie, Search, Settings, User2, ChevronUp } from "lucide-react"
+import { Calendar, Home, Banknote, Blocks, ChartPie, Sparkles, Search, Settings, User2, ChevronUp } from "lucide-react"
 
 import {
   Sidebar,
@@ -43,6 +43,11 @@ const items = [
     title: "Data Dashboard",
     url: "/data-dashboard",
     icon: ChartPie,
+  },
+  {
+    title: "AI",
+    url: "/ai",
+    icon: Sparkles,
   },
   // {
   //   title: "Calendar",

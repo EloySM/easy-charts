@@ -5,12 +5,14 @@ import { Plus } from 'lucide-react'
 import { DataTableDemo } from '@/features/home/components/data-table'
 import Link from 'next/link'
 import getTopCategoriesWithOthers from '@/features/home/services/get-expenseive-categories'
+import { getRecentExpenses } from '@/features/home/services/get-recent-expenses'
 
 export default async function Page() {
 // Disparamos las dos consultas a la vez
-  const [dataMensual, dataAnual] = await Promise.all([
+  const [dataMensual, dataAnual, recentExpenses] = await Promise.all([
     getTopCategoriesWithOthers(5, 'month'),
-    getTopCategoriesWithOthers(5, 'year')
+    getTopCategoriesWithOthers(5, 'year'),
+    getRecentExpenses()
   ])
 
   return (
@@ -36,7 +38,7 @@ export default async function Page() {
         <ChartPieDonutText data={dataAnual} period={'year'} />
         <ChartPieDonutText data={dataMensual} period={'month'} />
       </div>
-        <DataTableDemo/>    
+        <DataTableDemo data={recentExpenses}/>    
 
     <div className='w-full flex justify-end'>
       <ModeToggle/>

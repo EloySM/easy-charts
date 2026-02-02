@@ -42,6 +42,8 @@ export function ChartPieDonutText({ data, period}: { data: PieRow[], period: str
     fill: `var(--chart-${(index % 7) + 1})`, // Usa los colores predefinidos
   }))
 
+  const finalData  = chartData?.length ? chartData : [{name: 'Empty', value: 0.0001, fill: 'var(--chart-9)'}]
+
   const date = new Date()
   const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(date)
   const year = date.getFullYear()
@@ -63,7 +65,7 @@ export function ChartPieDonutText({ data, period}: { data: PieRow[], period: str
               content={<ChartTooltipContent hideLabel />}
             />
             <Pie
-              data={chartData}
+              data={finalData}
               dataKey="value"
               nameKey="name"
               innerRadius={60}

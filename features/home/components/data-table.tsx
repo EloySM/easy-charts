@@ -36,38 +36,14 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "ken99@example.com",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@example.com",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@example.com",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@example.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@example.com",
-  },
-]
+type Expenses = {
+  id: string,
+  name: string,
+  category: string,
+  amount: number,
+  date: string
+}
+
 
 export type Payment = {
   id: string
@@ -76,7 +52,7 @@ export type Payment = {
   email: string
 }
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Expenses>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -100,26 +76,53 @@ export const columns: ColumnDef<Payment>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: 'date',
+    header: ({ column }) => {
+      return (
+        <Button 
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')} 
+          >
+            Date
+            <ArrowUpDown />
+        </Button>
+      )
+    },
+    cell: ({ row }) => {
+      const dateValue = row.getValue('date') as string
+
+      if (!dateValue) return <div className="lowercase">-</div>
+
+      const formatedData = new Date(dateValue).toLocaleDateString('en-US', {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric'
+      })
+
+      return <div className="lowercase">{formatedData}</div>
+    }
+  },
+  {
+    accessorKey: "name",
+    header: "Name",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
+      <div className="capitalize">{row.getValue("name")}</div>
     ),
   },
   {
-    accessorKey: "email",
+    accessorKey: "category",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          Category
           <ArrowUpDown />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+    cell: ({ row }) => <div className="lowercase">{row.getValue("category")}</div>,
   },
   {
     accessorKey: "amount",
@@ -167,7 +170,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
 ]
 
-export function DataTableDemo() {
+export function DataTableDemo({ data }: { data: Expenses[] }) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -187,6 +190,11 @@ export function DataTableDemo() {
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    initialState: {
+      pagination: {
+        pageSize: 4
+      }
+    },
     state: {
       sorting,
       columnFilters,
@@ -199,10 +207,10 @@ export function DataTableDemo() {
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter name..."
+          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn("name")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -288,6 +296,11 @@ export function DataTableDemo() {
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
+
+        <div className="flex w-[100px] items-center justify-center text-sm font-medium">
+          Page {table.getState().pagination.pageIndex + 1} of{' ' + table.getPageCount()}
+        </div>
+
         <div className="space-x-2">
           <Button
             variant="outline"
