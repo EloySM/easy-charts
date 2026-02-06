@@ -106,7 +106,7 @@ export const columns: ColumnDef<Expenses>[] = [
     accessorKey: "name",
     header: "Name",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("name")}</div>
+      <div className="capitalize">{(row.getValue("name") as string).replaceAll('_', ' ')}</div>
     ),
   },
   {
@@ -122,7 +122,7 @@ export const columns: ColumnDef<Expenses>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("category")}</div>,
+    cell: ({ row }) => <div className="lowercase">{(row.getValue("category") as string).replaceAll('_', ' ')}</div>,
   },
   {
     accessorKey: "amount",

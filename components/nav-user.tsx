@@ -28,6 +28,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { createClient } from "@/lib/supabase/client"
+import { logout } from "@/app/auth/actions"
 
 type User = {
   name?: string
@@ -71,7 +73,7 @@ export function NavUser({ user }: { user: User}) {
                   {safeUser.email}
                 </span>
               </div>
-              <IconDotsVertical className="ml-auto size-4" />
+              {/* <IconDotsVertical className="ml-auto size-4" /> */}
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -102,7 +104,7 @@ export function NavUser({ user }: { user: User}) {
                 </div>
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
+            {/* <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <IconUserCircle />
@@ -117,8 +119,8 @@ export function NavUser({ user }: { user: User}) {
                 Notifications
               </DropdownMenuItem>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuSeparator /> */}
+            <DropdownMenuItem onClick={() => logout()}>
               <IconLogout />
               Log out
             </DropdownMenuItem>

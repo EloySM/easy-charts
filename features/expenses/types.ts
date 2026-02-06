@@ -26,3 +26,11 @@ export type ExpenseRowData = {
   additional_notes: string  | null
   categories: { name: string} | null
 }
+
+export type ExpenseCardData = {
+  id: string,
+  description: string,
+  amount: number,
+  date: string
+  categories: { name: string } | null
+}

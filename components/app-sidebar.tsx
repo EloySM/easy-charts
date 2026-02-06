@@ -1,6 +1,6 @@
 'use client'
 
-import { Calendar, Home, Banknote, Blocks, ChartPie, Sparkles, Search, Settings, User2, ChevronUp } from "lucide-react"
+import { Home, Banknote, Blocks, ChartPie, Sparkles, Settings } from "lucide-react"
 
 import {
   Sidebar,
@@ -11,15 +11,11 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarFooter,
 } from "@/components/ui/sidebar"
 
 import { NavUser } from "@/components/nav-user"
 
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
 import Link from "next/link"
-import { supabaseServer } from "@/lib/supabase/server"
-import { createServer } from "http"
 import { usePathname } from "next/navigation"
 
 // Menu items.
@@ -49,16 +45,6 @@ const items = [
     url: "/ai",
     icon: Sparkles,
   },
-  // {
-  //   title: "Calendar",
-  //   url: "#",
-  //   icon: Calendar,
-  // },
-  // {
-  //   title: "Search",
-  //   url: "#",
-  //   icon: Search,
-  // },
   {
     title: "Settings",
     url: "/settings",

@@ -60,8 +60,6 @@ export default function useCategoriesInfinite() {
 
     // Mes/año actuales
     const now = new Date()
-    const month = now.getMonth() + 1
-    const year = now.getFullYear()
 
     // Rango de fechas para gastos del mes actual
     const fromDate = startOfMonth(now).toISOString()
@@ -71,10 +69,10 @@ export default function useCategoriesInfinite() {
     //    (puede que alguna categoría no tenga budget todavía -> la tratamos como 0)
     const budgetsPromise = supabase
       .from("budgets")
-      .select("category_id, monthly_limit")
-      .eq("month", month)
-      .eq("year", year)
-      .in("category_id", categoryIds)
+      .select("category_id, monthly_limit, month, year")
+      .in("category_id", categoryIds) // Saca las categorias que se envuentren dentro de la variable de categoryIds
+      .order('year', {ascending: false})
+      .order('month', {ascending: false})
 
     // 3) Traer gastos del mes actual para esas categorías
     //    y luego sumarlos por category_id en el cliente
@@ -103,8 +101,10 @@ export default function useCategoriesInfinite() {
 
     // Map presupuesto por category_id
     const budgetByCat = new Map<string, number>() // El objeto Map está diseñado para guardar parejas, como la clave(uuid) y el valor(limite mensual)
-    for (const c of budgets ?? []) {
-      budgetByCat.set(c.category_id as string, Number(c.monthly_limit) || 0)
+    for (const b of budgets ?? []) {
+      if(!budgetByCat.has(b.category_id)) {
+        budgetByCat.set(b.category_id as string, Number(b.monthly_limit) || 0)
+      }
     }
 
     // Sumatorio de gastos por category_id

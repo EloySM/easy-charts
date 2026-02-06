@@ -13,7 +13,7 @@ export default function CategoriesList() {
           <CategoryCard key={c.id} category={c} />
         ))}
       </div>
-
+      
       <div
         ref={loaderRef}
         className="flex h-16 items-center justify-center text-sm text-muted-foreground"

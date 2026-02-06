@@ -7,9 +7,9 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { IconCalendar, IconEdit } from "@tabler/icons-react"
 import Link from "next/link"
-import { ExpenseRowData } from "../types" // Importamos el tipo del padre
+import { ExpenseCardData } from "../types" // Importamos el tipo del padre
 
-export default function ExpenseCard({ expense }: { expense: ExpenseRowData }) {
+export default function ExpenseCard({ expense }: { expense: ExpenseCardData }) {
   // 1. Extraemos el nombre entrando en el primer elemento del array [0]
   // Usamos el "?" para que no rompa la web si el array viene vacío
   const categoryName = expense.categories?.name || "Sin categoría"

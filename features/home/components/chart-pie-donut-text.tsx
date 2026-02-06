@@ -37,7 +37,7 @@ export function ChartPieDonutText({ data, period}: { data: PieRow[], period: str
 
    // Añadimos una clave "key" para que ChartContainer pueda asociar
   const chartData = data.map((d, index) => ({
-    name: d.label,
+    name: d.label.replaceAll('_', ' '),
     value: d.value,
     fill: `var(--chart-${(index % 7) + 1})`, // Usa los colores predefinidos
   }))
