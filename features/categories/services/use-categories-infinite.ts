@@ -69,10 +69,11 @@ export default function useCategoriesInfinite() {
     //    (puede que alguna categoría no tenga budget todavía -> la tratamos como 0)
     const budgetsPromise = supabase
       .from("budgets")
-      .select("category_id, monthly_limit, month, year")
+      .select("category_id, monthly_limit")
       .in("category_id", categoryIds) // Saca las categorias que se envuentren dentro de la variable de categoryIds
-      .order('year', {ascending: false})
-      .order('month', {ascending: false})
+      .gte('created_at', fromDate)
+      .lt('created_at', toDate)
+      .order('created_at', {ascending: false})
 
     // 3) Traer gastos del mes actual para esas categorías
     //    y luego sumarlos por category_id en el cliente

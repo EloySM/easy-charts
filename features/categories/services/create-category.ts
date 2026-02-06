@@ -35,11 +35,6 @@ export async function createCategory(formData: FormData) {
     throw new Error(categoryError?.message ?? 'Failed to create category')
   }
 
-  // Mes/Año actual
-  const date = new Date()
-  const month = date.getMonth() + 1 // Porque va de 0 a 11, siendo 0=1 y asi consecutivamente
-  const year = date.getFullYear()
-
   const rawMonthlyLimit = formData.get('category-amount')
   if (typeof rawMonthlyLimit !== 'string' || isNaN(Number(rawMonthlyLimit))) {
     throw new Error('Invalid monthly limit')
@@ -49,8 +44,6 @@ export async function createCategory(formData: FormData) {
 
   const budgetData: CreateBudgetInput = {
     category_id: categoryRow.id,
-    month: month,
-    year: year,
     monthly_limit: monthlyLimit
   }
 
