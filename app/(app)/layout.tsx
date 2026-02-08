@@ -1,18 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebarWithUser } from "@/components/app-sidebar-with-user"
 import { ThemeProvider } from "@/components/theme-provider" 
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,14 +18,17 @@ export default function RootLayout({
     <SidebarProvider>
       <AppSidebarWithUser />
       <main className="w-full">
-        <SidebarTrigger className="absolute mt-3 ml-7" />
+        <SiteHeader/>
+        {/* <SidebarTrigger className="absolute mt-3 ml-7" /> */}
         <ThemeProvider
           attribute='class'
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-         {children}  
+          <div className="mt-12 px-14">
+            {children}
+          </div>  
         </ThemeProvider>
       </main>
     </SidebarProvider>

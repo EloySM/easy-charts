@@ -7,8 +7,8 @@ export default function CategoriesList() {
   const { items, loading, hasMore, loaderRef } = useCategoriesInfinite()
 
   return (
-    <div className="@container/main mx-auto w-full max-w-screen-2xl">
-      <div className="grid grid-cols-1 gap-6 px-4 lg:px-6 @xl/main:grid-cols-2 @4xl/main:grid-cols-3">
+    <div className="@container/main w-full max-w-screen-2xl">
+      <div className="grid grid-cols-1 gap-6 @xl/main:grid-cols-2 @4xl/main:grid-cols-3">
         {items.map((c) => (
           <CategoryCard key={c.id} category={c} />
         ))}

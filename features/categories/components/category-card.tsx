@@ -26,8 +26,8 @@ export default function CategoryCard({ category } : CategoryCardProps) {
               <Badge 
                 variant="secondary" 
                 className={`text-[10px] font-bold uppercase tracking-wider ${
-                  exact ? "bg-blue-100 text-blue-700" : 
-                  over ? "bg-red-100 text-red-700" : "bg-emerald-100 text-emerald-700"
+                  exact ? "bg-sky-100 text-sky-600" : 
+                  over ? "bg-rose-100 text-orange-600" : "bg-emerald-100 text-emerald-700"
                 }`}
               >
                 {exact ? "Perfect Match" : over ? "Over Limit" : "On Track"}
@@ -55,7 +55,7 @@ export default function CategoryCard({ category } : CategoryCardProps) {
         <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
           <div 
             className={`h-full transition-all ${
-              exact ? "bg-blue-500" : over ? "bg-red-500" : "bg-emerald-500"
+              exact ? "bg-sky-400" : over ? "bg-orange-500" : "bg-emerald-500"
             }`} 
             style={{ width: `${Math.min((category.spent / category.monthly_limit) * 100, 100)}%` }}   // Se pone Math.min y al final ,100 porque si lo gastado se sale del presupuesto entonces solo mostrará la barra llena y no se saldrá del div
           />
@@ -67,13 +67,13 @@ export default function CategoryCard({ category } : CategoryCardProps) {
         <div className="flex items-center gap-2 font-medium">
           {exact ? (
             <>
-              <IconTargetArrow className="size-4 text-blue-500" />
-              <span className="text-blue-600 italic">Exactly on the limit!</span>
+              <IconTargetArrow className="size-4 text-sky-400" />
+              <span className="text-sky-400 italic">Exactly on the limit!</span>
             </>
           ) : over ? (
             <>
-              <IconAlertTriangle className="size-4 text-red-500" />
-              <span className="text-red-600">${Math.abs(remaining).toFixed(2)} over</span>  {/* Para que no salga en negativo*/}
+              <IconAlertTriangle className="size-4 text-orange-400" />
+              <span className="text-orange-400">${Math.abs(remaining).toFixed(2)} over</span>  {/* Para que no salga en negativo*/}
             </>
           ) : (
             <>

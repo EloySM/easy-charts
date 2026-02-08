@@ -21,6 +21,17 @@ export async function createCategory(formData: FormData) {
   const { data: authData, error: authError } = await supabase.auth.getUser()
   if (authError || !authData.user) throw new Error('Not authenticated')
 
+  const { count, error: countError } = await supabase
+    .from('categories')
+    .select('*', { count: 'exact', head: true })
+    .eq('user_id', authData.user.id)
+    .eq('is_active', true)
+
+  if (countError) throw new Error('Error checking category limit')
+
+  const LIMIT = 15
+  if (count !== null && count >= LIMIT) throw new Error(`Limit reached: You can only have up to ${LIMIT} categories on the free plan.`)
+
   // Insert category y obtener id
   const { data: categoryRow, error: categoryError } = await supabase
   .from('categories')

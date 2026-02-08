@@ -6,21 +6,22 @@ import { ExpenseList } from "@/features/expenses/components/expenses-list";
 export default function Page() {
 
   return (
-    <div className='flex flex-col items-center m-8'>
-      Expenses
+    <div className=''>
 
+    <div className="flex w-full justify-end mb-6">
       <Link 
-      href='/expenses/new-expense' 
-      className='w-full flex justify-end'>
-      <Button
-        variant="default"
-        size="sm"
-        className="font-semibold px-4"
+        href='/expenses/new-expense' 
       >
-        <Plus className='' />
-          Add expense
-      </Button>
-    </Link>
+        <Button
+          variant="default"
+          size="sm"
+          className="font-semibold px-4 hover: cursor-pointer"
+        >
+          <Plus className='' />
+            Add expense
+        </Button>
+      </Link>
+    </div>
 
     <ExpenseList />
     </div>

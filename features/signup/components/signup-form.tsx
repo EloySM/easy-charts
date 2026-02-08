@@ -23,8 +23,6 @@ export function SignupForm({ className, ...props }: React.ComponentProps<typeof 
     setLoading(true);
 
     const form = new FormData(e.currentTarget);
-    const full_name = String(form.get("name") ?? "");
-    const email = String(form.get("email") ?? "");
     const password = String(form.get("password") ?? "");
     const confirm = String(form.get("confirm-password") ?? "");
 
@@ -58,8 +56,8 @@ export function SignupForm({ className, ...props }: React.ComponentProps<typeof 
     return (
       <Card className={cn("w-full", className)} {...props}>
         <CardHeader>
-          <CardTitle>¡Confirm your email!</CardTitle>
-          <CardDescription>
+          <CardTitle>¡Confirm your Email!</CardTitle>
+          <CardDescription className="text-sm">
             We have sent a confirmation link to your email.
             Please check it to activate your account.
           </CardDescription>
