@@ -50,7 +50,8 @@ export function AppSidebar({ user, ...props }: React.ComponentProps<typeof Sideb
   const pathname = usePathname()
 
   return (
-    <Sidebar collapsible="offcanvas" {...props}>
+    // Por defecto tiene bordes sidebar pero con className='border-none' se le quitan
+    <Sidebar collapsible="offcanvas" className="border-none" {...props}> 
       <SidebarHeader className="pt-4">
         <SidebarMenu>
           {/* Logo Section */}

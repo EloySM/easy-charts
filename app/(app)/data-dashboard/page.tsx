@@ -1,12 +1,16 @@
-import { ChartAreaGradient } from "@/components/chart-area-gradient";
-import { ChartAreaInteractive } from "@/components/chart-area-interactive";
-import { ChartPieDonutText } from '@/features/home/components/chart-pie-donut-text'
+import { ChartAreaGradient } from "@/features/data-dashboard/components/chart-area-gradient";
+import { ChartAreaInteractive } from "@/features/data-dashboard/components/chart-area-interactive";
+import { SectionCards } from "@/features/data-dashboard/components/section-card";
 
 export default function Page() {
   return (
     <div className="m-8">
-      
-      <div className="mt-24">
+
+      <div>
+        <SectionCards/>
+      </div>
+
+      <div className="">
         <ChartAreaInteractive />
       </div>
 

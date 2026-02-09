@@ -1,4 +1,4 @@
-import { ModeToggle } from "@/components/mode-toggle";
+import { ModeToggle } from "@/features/settings/components/mode-toggle";
 
 export default function Page() {
 

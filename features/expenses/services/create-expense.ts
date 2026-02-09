@@ -3,7 +3,7 @@ import { redirect } from "next/navigation"
 
 export default async function createExpense(formData: FormData) {
   'use server'
-
+  
   const rawAmount = formData.get('expense-amount')
   const categoryId = formData.get('expense-category')
   const description = formData.get('expense-description')

@@ -22,7 +22,6 @@ import { supabaseServer } from "@/lib/supabase/server"
 import createExpense from "../services/create-expense"
 
 export default async function FieldExpense() {
-  
   const supabase = await supabaseServer()
 
   const { data: categories, error } = await supabase

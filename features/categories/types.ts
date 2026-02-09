@@ -29,3 +29,8 @@ export type CategoryCardData = {
   monthly_limit: number
   spent: number
 }
+
+export type CreateBudgetInput = {
+  category_id: string,
+  monthly_limit: number
+}

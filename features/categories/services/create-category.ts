@@ -1,12 +1,11 @@
-'use server'  // Esto es para hacer todo el archivo server action
-
 import { redirect } from "next/navigation"
 import { supabaseServer } from "@/lib/supabase/server"
 import type { CreateCategoryInput, CategoryIdRow } from "../types"
-import type { CreateBudgetInput } from "@/features/budgets/types"
+import type { CreateBudgetInput } from "@/features/categories/types"
 
 export async function createCategory(formData: FormData) {
   // Validar nombre
+  'use server'
   const rawName = formData.get('category-name')
   if (typeof rawName !== 'string' || rawName.trim() === '') {
     throw new Error('Invalid category name')

@@ -105,9 +105,9 @@
   --chart-1: oklch(51.558% 0.22575 262.665);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(72.034% 0.18464 44.985);
-  --chart-4: oklch(63.896% 0.24645 305.61);
+  --chart-4: oklch(70.251% 0.00008 271.152); 
   --chart-5: oklch(84.212% 0.15486 82.123); 
-  --chart-6: oklch(70.251% 0.00008 271.152); 
+  --chart-6: oklch(63.896% 0.24645 305.61);
   --chart-7: oklch(80.596% 0.11881 217.659);
   --chart-8: oklch(80.279% 0.26773 142.671);
   --chart-9: oklch(59.987% 0.00007 271.152);
@@ -129,6 +129,8 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-inter), sans-serif;
+    /* se pone fondo al body para que no se vea oscuro al hacer scroll */
+    @apply bg-[#171717]
   }
   ::selection {
     background-color: rgba(240, 255, 255, 0.25);

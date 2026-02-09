@@ -23,7 +23,7 @@ export default function CategoryCard({ category } : CategoryCardProps) {
               {category.name.replace(/_/g, " ")}
             </CardTitle>
             <CardDescription className="flex items-center gap-1">
-              <Badge 
+              <Badge
                 variant="secondary" 
                 className={`text-[10px] font-bold uppercase tracking-wider ${
                   exact ? "bg-sky-100 text-sky-600" : 

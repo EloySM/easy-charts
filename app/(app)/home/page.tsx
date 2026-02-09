@@ -1,9 +1,5 @@
 import { ChartPieDonutText } from '@/features/home/components/chart-pie-donut-text'
-import { ModeToggle } from '@/components/mode-toggle'
-import { Button } from '@/components/ui/button'
-import { Plus } from 'lucide-react'
 import { DataTableDemo } from '@/features/home/components/data-table'
-import Link from 'next/link'
 import getTopCategoriesWithOthers from '@/features/home/services/get-expenseive-categories'
 import { getRecentExpenses } from '@/features/home/services/get-recent-expenses'
 
