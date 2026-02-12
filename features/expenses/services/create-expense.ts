@@ -22,7 +22,7 @@ export default async function createExpense(formData: FormData) {
 
   const amount = Number(rawAmount)
 
-  const date = 
+  const date_time = 
     typeof rawDate === 'string' && rawDate.trim() !== ''
       ? new Date(rawDate).toISOString()
       : new Date().toISOString()
@@ -40,7 +40,7 @@ export default async function createExpense(formData: FormData) {
     category_id: categoryId,
     amount,
     description: description.trim().replace(/\s+/g, '_'),
-    date,
+    date_time,
     additional_notes: typeof comment === 'string' && comment.trim() !== '' ? comment : null
   })
 

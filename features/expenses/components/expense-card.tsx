@@ -40,7 +40,7 @@ export default function ExpenseCard({ expense }: { expense: ExpenseCardData }) {
       <CardFooter className="border-t bg-muted/30 py-3 flex items-center justify-between text-xs text-muted-foreground">
         <div className="flex items-center gap-2">
           <IconCalendar className="size-3.5" />
-          {new Date(expense.date).toLocaleDateString(undefined, {
+          {new Date(expense.date_time).toLocaleDateString(undefined, {
             day: 'numeric',
             month: 'short',
             year: 'numeric'

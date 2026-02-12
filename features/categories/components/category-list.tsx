@@ -20,7 +20,7 @@ export default function CategoriesList() {
       >
         {loading && "Loading more categories…"}
         {!loading && !hasMore && items.length > 0 && "No more categories"}
-        {!loading && items.length === 0 && "Loading categories…"}
+        {!loading && items.length === 0 && "No Categories yet"}
       </div>
     </div>
   )

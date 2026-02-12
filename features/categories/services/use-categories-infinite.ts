@@ -80,8 +80,8 @@ export default function useCategoriesInfinite() {
     const expensesPromise = supabase
       .from("expenses")
       .select("category_id, amount")
-      .gte("date", fromDate)
-      .lt("date", toDate)
+      .gte("date_time", fromDate)
+      .lt("date_time", toDate)
       .in("category_id", categoryIds)
 
     const [

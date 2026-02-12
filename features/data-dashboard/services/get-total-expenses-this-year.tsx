@@ -9,22 +9,19 @@ export default async function getTotalExpensesThisYear() {
   if (!user) return { totalExpenses: 0 }
 
   const thisYear = new Date().getFullYear()
-  const startOfYear = `${thisYear}-01-01`
-  const endOfYear = `${thisYear}-12-31T23:59:59`
 
   // 2. Query filtrando por usuario y rango de fechas
-  const { data: expenses, error: expError } = await supabase
-    .from('expenses')
-    .select('amount')
-    .eq('user_id', user.id) // ¡Importante para que no sume lo de otros!
-    .gte('date', startOfYear)
-    .lte('date', endOfYear)
+  const { data, error } = await supabase
+  .rpc('get_total_expenses', { 
+    p_user_id: user.id, 
+    p_year: thisYear 
+  });
 
-  if (expError) {
-    console.error("Error fetching expenses:", expError)
+  if (error) {
+    console.error("Error fetching expenses:", error)
     return { totalExpenses: 0 }
   }
 
   // 4. Retornamos el objeto que espera tu componente
-  return expenses?.reduce((sum, exp) => sum + (exp.amount || 0), 0) || 0
+  return data
 }

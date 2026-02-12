@@ -24,8 +24,8 @@ export default function useExpenseInfinite() {
 
     const {data: expenses, error: expError} = await supabase
     .from('expenses')
-    .select('id, description, amount, date, additional_notes, categories(name)')
-    .order('date', {ascending: false})
+    .select('id, description, amount, date_time, additional_notes, categories(name)')
+    .order('date_time', {ascending: false})
     .range(from, to)
 
     if(expError) {
@@ -48,7 +48,7 @@ export default function useExpenseInfinite() {
       id: c.id,
       description: c.description,
       amount: c.amount,
-      date: c.date,
+      date_time: c.date_time,
       categories: c.categories
     }))
 

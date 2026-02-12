@@ -8,7 +8,7 @@ export type ExpenseRowData = {
   id: string
   description: string
   amount: number
-  date: string
+  date_time: string
   additional_notes: string | null
   categories: { name: string } | null // Sin corchetes []
 }
@@ -34,7 +34,7 @@ export function ExpenseList() {
       >
         {loading && "Loading more expenses…"}
         {!loading && !hasMore && items.length > 0 && "No more expenses"}
-        {!loading && items.length === 0 && "Loading expenses..."}
+        {!loading && items.length === 0 && "No expenses yet"}
       </div>
     </div>
   )

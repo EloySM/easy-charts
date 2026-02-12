@@ -78,8 +78,8 @@ export function AppSidebar({ user, ...props }: React.ComponentProps<typeof Sideb
                 size="sm"
                 className="w-full justify-center gap-2 shadow-md hover:shadow-lg transition-all"
               >
-                <Sparkles className="size-4 fill-primary text-primary-foreground" />
-                <span className="font-medium">Quick create</span>
+                <Sparkles className="fill-primary text-primary-foreground" />
+                <span className="font-extrabold">Quick create</span>
               </Button>
             </Link>
           </SidebarMenuItem>

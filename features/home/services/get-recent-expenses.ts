@@ -9,7 +9,7 @@ export async function getRecentExpenses() {
       id,
       description,
       amount,
-      date,
+      date_time,
       categories ( name )  
     `)
     .order('date', { ascending: false })
@@ -29,7 +29,7 @@ export async function getRecentExpenses() {
       id: item.id,
       name: item.description,
       amount: item.amount,
-      date: item.date,
+      date: item.date_time,
       category: Array.isArray(cat) 
         ? cat[0]?.name 
         : cat?.name ?? 'Sin categoría'
