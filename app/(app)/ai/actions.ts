@@ -12,10 +12,10 @@ export async function getDetailedStatsForAI(days: number = 30) {
   const { data, error } = await supabase.rpc('get_expense_window_summary', {
     p_user_id: user.id,
     p_days: days,
-    p_tz: 'UTC', // O el timezone del usuario
-    p_top_categories: 5,
-    p_top_descriptions: 10,
-    p_top_peak_days: 3
+    // p_tz: 'UTC', // O el timezone del usuario
+    // p_top_categories: 5,
+    // p_top_descriptions: 10,
+    // p_top_peak_days: 3
   })
 
   if (error) {

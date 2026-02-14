@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 export default function Page() {
   return (
     
-    <div className="">
+    // <div className="">
       <Card className="">
         <h1 className="flex text-2xl font-medium justify-center">
           New expense
@@ -12,6 +12,6 @@ export default function Page() {
 
         <FieldExpense/>
       </Card>
-    </div>
+    // </div>
   );
 }

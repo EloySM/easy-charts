@@ -12,7 +12,7 @@ export async function getRecentExpenses() {
       date_time,
       categories ( name )  
     `)
-    .order('date', { ascending: false })
+    .order('date_time', { ascending: false })
     .limit(20)
 
   if (error || !data) { 

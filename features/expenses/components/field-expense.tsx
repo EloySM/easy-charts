@@ -75,7 +75,7 @@ export default async function FieldExpense() {
                   Select a spending category
                 </FieldDescription>
 
-                <NativeSelect name="expense-category">
+                <NativeSelect required name="expense-category">
                   <NativeSelectOption value="">Select category</NativeSelectOption>
 
                   {categories.map((category) => (
