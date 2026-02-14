@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { CategoryCardData, CategoryRowData } from "../types"
 
-const PAGE_SIZE = 15  // Cada carga traerá 15 nuevas categorias
+const PAGE_SIZE = 15   // Cada carga traerá 15 nuevas categorias
 
 function startOfMonth(d: Date) {
   return new Date(d.getFullYear(), d.getMonth(), 1, 0, 0, 0, 0) // Coge el año, el mes, el dia 1, 0 horas, 0 minnutos, 0 segundos, 0 milisegundos
@@ -127,6 +127,7 @@ export default function useCategoriesInfinite() {
     setItems((prev) => [...prev, ...newItems])  // Añadimos newItems a items
     setPage((p) => p + 1) // Avanza de pagina
     setLoading(false) // Paramos la carga
+
   }, [page, loading, hasMore])
 
   // Observer (carga inicial + siguientes)
