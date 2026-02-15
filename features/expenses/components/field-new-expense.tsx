@@ -21,7 +21,7 @@ import { NativeSelect, NativeSelectOption } from "../../../components/ui/native-
 import { supabaseServer } from "@/lib/supabase/server"
 import createExpense from "../services/create-expense"
 
-export default async function FieldExpense() {
+export default async function FieldNewExpense() {
   const supabase = await supabaseServer()
 
   const { data: categories, error } = await supabase

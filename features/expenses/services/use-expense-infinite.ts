@@ -24,7 +24,7 @@ export default function useExpenseInfinite() {
 
     const {data: expenses, error: expError} = await supabase
     .from('expenses')
-    .select('id, description, amount, date_time, additional_notes, categories(name)')
+    .select('id, description, amount, date_time, category_id, additional_notes, categories(name)')
     .order('date_time', {ascending: false})
     .range(from, to)
 
@@ -46,9 +46,11 @@ export default function useExpenseInfinite() {
 
     const newItems: ExpenseCardData[] = batch.map((c) => ({
       id: c.id,
-      description: c.description,
       amount: c.amount,
+      description: c.description,
+      category_id: c.category_id,
       date_time: c.date_time,
+      additional_notes: c.additional_notes,
       categories: c.categories
     }))
 

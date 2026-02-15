@@ -1,4 +1,4 @@
-import FieldExpense from "@/features/expenses/components/field-expense";
+import FieldNewExpense from "@/features/expenses/components/field-new-expense";
 import { Card } from "@/components/ui/card";
 
 export default function Page() {
@@ -10,7 +10,7 @@ export default function Page() {
           New expense
         </h1>
 
-        <FieldExpense/>
+        <FieldNewExpense/>
       </Card>
     // </div>
   );

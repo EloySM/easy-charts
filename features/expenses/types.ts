@@ -20,8 +20,9 @@ export type CreateExpenseInput = {
 
 export type ExpenseRowData = {
   id: string
-  description: string
   amount: number
+  description: string
+  category_id: string
   date_time: string
   additional_notes: string  | null
   categories: { name: string} | null
@@ -29,8 +30,10 @@ export type ExpenseRowData = {
 
 export type ExpenseCardData = {
   id: string,
-  description: string,
   amount: number,
-  date_time: string
-  categories: { name: string } | null
+  category_id: string,
+  description: string,
+  date_time: string,
+  additional_notes: string | null,
+  categories: { name: string } | null,
 }

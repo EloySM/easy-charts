@@ -13,10 +13,16 @@ export default function ExpenseCard({ expense }: { expense: ExpenseCardData }) {
   // 1. Extraemos el nombre entrando en el primer elemento del array [0]
   // Usamos el "?" para que no rompa la web si el array viene vacío
   const categoryName = expense.categories?.name || "Sin categoría"
-  console.log(expense)
+  // 1. Creamos los parámetros de búsqueda de forma segura
+  const params = new URLSearchParams({
+    amount: expense.amount.toString(),
+    category: expense.category_id,
+    description: expense.description,
+    date_time: expense.date_time,
+    additional_notes: expense.additional_notes ?? ''})  // Porque no necesarioamente hay notas adicionales
 
   return (
-    <Card className="transition hover:shadow-md">
+    <Card className="group transition hover:shadow-md">
       <CardHeader className="space-y-1">
         <div className="flex items-start justify-between">
           <div>
@@ -48,8 +54,8 @@ export default function ExpenseCard({ expense }: { expense: ExpenseCardData }) {
         </div>
 
         <Link
-          href={`/expenses/${expense.id}/edit`}
-          className="flex items-center gap-1 font-medium text-primary hover:text-primary/80 transition-colors"
+          href={`/expenses/${expense.id}/edit-expense?${params.toString()}`}
+          className="flex items-center gap-1 font-medium text-primary hover:text-primary/80  transition-all duration-300 opacity-0 group-hover:opacity-100"
         >
           <IconEdit className="size-3.5" />
           Edit

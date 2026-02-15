@@ -15,7 +15,7 @@ export default function CategoryCard({ category } : CategoryCardProps) {
   const exact = remaining === 0 // Si el dinero restante es igual a 0
 
   return (
-    <Card className="flex flex-col justify-between transition hover:shadow-md">
+    <Card className="group flex flex-col justify-between transition duration-300 hover:shadow-md">
       <CardHeader className="space-y-3">
         <div className="flex items-start justify-between">
           <div className="space-y-1">
@@ -85,7 +85,7 @@ export default function CategoryCard({ category } : CategoryCardProps) {
 
         <Link
           href={`/categories/${category.id}/edit`}
-          className="flex items-center gap-1 font-medium text-primary hover:text-primary/80 transition-colors"
+          className="flex items-center gap-1 font-medium text-primary hover:text-primary/80 opacity-0 group-hover:opacity-100 transition-all duration-300"
         >
           <IconEdit className="size-3.5" />
           Edit
