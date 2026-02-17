@@ -11,7 +11,14 @@ export default async function Page({ params, searchParams }: { params: Promise<{
         Edit expense
       </h1>
 
-      <FieldEditExpense id={id} initialData={data}/>
+      <FieldEditExpense id={id} initialData={{
+        amount: data.amount.toString(),
+        category: data.category_id, // Asegúrate que el componente espere 'category' y no 'category_id'
+        description: data.description,
+        date_time: data.date_time,
+        additional_notes: data.additional_notes ?? undefined // Convierte null a undefined si es necesario
+        }}
+      />
     </Card>
   )
 }

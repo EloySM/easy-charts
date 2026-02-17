@@ -26,6 +26,7 @@ export default function useExpenseInfinite() {
     .from('expenses')
     .select('id, description, amount, date_time, category_id, additional_notes, categories(name)')
     .order('date_time', {ascending: false})
+    .is('deleted_at', null)
     .range(from, to)
 
     if(expError) {
@@ -75,6 +76,17 @@ export default function useExpenseInfinite() {
     return () => observer.disconnect()
   }, [loadMore])
 
-  return {items, loading, hasMore, loaderRef}
+  /**
+ * Elimina un gasto del estado local de forma optimista.
+ * 1. useCallback: Memoriza la función para evitar re-renders innecesarios en las cards.
+ * 2. setItems: Usa el estado previo (prev) para garantizar la integridad de los datos.
+ * 3. filter: Crea un nuevo array excluyendo el ID borrado, lo que dispara la 
+ * actualización visual inmediata sin esperar al servidor o recargar la página.
+ */
+  const removeItem = useCallback((id: string) => {
+    setItems((prev) => prev.filter(item => item.id !== id));  // Si el id es diferente al que quiero eliminar entonces no se añade
+  }, []);
+
+  return {items, loading, hasMore, loaderRef, removeItem}
 
 }

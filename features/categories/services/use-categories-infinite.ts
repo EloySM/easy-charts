@@ -37,7 +37,7 @@ export default function useCategoriesInfinite() {
     const { data: categories, error: catErr } = await supabase  // categories -> se guardan las categorias y catErr -> error si ocurrio en la consulta
       .from("categories")
       .select("id, name")
-      .eq("is_active", true)
+      .is("deleted_at", null)
       .order("name", { ascending: true })
       .range(from, to)
 
@@ -81,6 +81,7 @@ export default function useCategoriesInfinite() {
       .from("expenses")
       .select("category_id, amount")
       .gte("date_time", fromDate)
+      .is('deleted_at', null)
       .lt("date_time", toDate)
       .in("category_id", categoryIds)
 

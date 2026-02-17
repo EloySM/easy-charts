@@ -1,4 +1,4 @@
-import { FieldSet, FieldLegend, FieldDescription, FieldGroup, Field, FieldLabel } from "@/components/ui/field";
+import { FieldSet, FieldGroup, Field, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { InputGroup, InputGroupAddon, InputGroupText, InputGroupInput } from "@/components/ui/input-group";
 import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
@@ -26,7 +26,7 @@ export default async function FieldEditExpense({ id, initialData }: FieldEditExp
   const { data: categories, error } = await supabase
     .from("categories")
     .select("id, name")
-    .eq("is_active", true)
+    .is("deleted_at", null)
     .order("name");
 
   if (error) {
@@ -82,7 +82,7 @@ export default async function FieldEditExpense({ id, initialData }: FieldEditExp
               <FieldLabel>Description</FieldLabel>
               <Input 
                 name="expense-description" // No olvides el name para la Server Action
-                defaultValue={initialData.description.replace(/_/g, ' ')} 
+                defaultValue={initialData.description.replace(/_/g, ' ')}
               />
             </Field>
 

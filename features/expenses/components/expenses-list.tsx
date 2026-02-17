@@ -15,7 +15,7 @@ export type ExpenseRowData = {
 
 export function ExpenseList() {
 
-  const { items, loading, hasMore, loaderRef } = useExpenseInfinite()
+  const { items, loading, hasMore, loaderRef, removeItem } = useExpenseInfinite()
 
   return (
     <div className="@container/main mx-auto w-full max-w-screen-2xl">
@@ -24,6 +24,7 @@ export function ExpenseList() {
           <ExpenseCard
             key={e.id}
             expense={e}
+            onDelete={removeItem}
           />
         ))}
       </div>

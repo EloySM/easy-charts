@@ -1,9 +1,13 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { IconCash, IconEdit, IconAlertTriangle, IconCircleCheck, IconTargetArrow } from "@tabler/icons-react";
+import { IconCash, IconEdit, IconAlertTriangle, IconCircleCheck, IconTargetArrow, IconTrash } from "@tabler/icons-react";
 import Link from "next/link";
 import { CategoryCardData } from "../types";
 import { Separator } from "@/components/ui/separator"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
+import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import { MoreHorizontal } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface CategoryCardProps {
   category: CategoryCardData
@@ -14,6 +18,10 @@ export default function CategoryCard({ category } : CategoryCardProps) {
   const over = remaining < 0  // Si el el dinero restante es menor que 0
   const exact = remaining === 0 // Si el dinero restante es igual a 0
 
+  const params = new URLSearchParams({
+    name: category.name,
+    budget: category.monthly_limit.toString()
+  })
   return (
     <Card className="group flex flex-col justify-between transition duration-300 hover:shadow-md">
       <CardHeader className="space-y-3">
@@ -83,13 +91,49 @@ export default function CategoryCard({ category } : CategoryCardProps) {
           )}
         </div>
 
-        <Link
+        {/* <Link
           href={`/categories/${category.id}/edit`}
           className="flex items-center gap-1 font-medium text-primary hover:text-primary/80 opacity-0 group-hover:opacity-100 transition-all duration-300"
         >
           <IconEdit className="size-3.5" />
           Edit
-        </Link>
+        </Link> */}
+        <div className="transition-all duration-300 opacity-0 group-hover:opacity-100 has-[button[data-state=open]]:opacity-100"> {/* Con has lo que se haces es hacer referencia un elemento hijo */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {/* <DropdownMenuItem>
+              <Eye className="mr-1"/>
+              <span>View</span>
+            </DropdownMenuItem> */}
+            <Link
+            href={`/categories/${category.id}/edit-category?${params.toString()}`}>
+              <DropdownMenuItem>
+                <IconEdit className="mr-1"/>
+                <span>Edit</span>
+              </DropdownMenuItem>
+            </Link>
+            <DropdownMenuSeparator/>
+            <DropdownMenuItem 
+              variant='destructive'
+              onSelect={(e) => {
+                e.preventDefault()
+                // handleDelete()
+              }}
+              // disabled={isPending}
+              className="cursor-pointer"
+            >
+              <IconTrash/>
+              <span>Delete</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        </div>
       </CardFooter>
     </Card>
   )
