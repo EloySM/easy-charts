@@ -12,6 +12,7 @@ export async function getRecentExpenses() {
       date_time,
       categories ( name )  
     `)
+    .is('deleted_at', null)
     .order('date_time', { ascending: false })
     .limit(20)
 

@@ -26,7 +26,7 @@ export default function FieldEditCategory({ id, initialData }: FieldEditCategory
             </Field>
             <Field>
               <FieldLabel>Budget</FieldLabel>
-              <Input name="category-amount" type="number" defaultValue={`${initialData.budget}`}/>
+              <Input name="category-budget" type="number" defaultValue={`${initialData.budget}`}/>
             </Field>
             <Button type="submit">Update</Button>
           </FieldGroup>
