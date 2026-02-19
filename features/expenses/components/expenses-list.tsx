@@ -3,16 +3,6 @@
 import ExpenseCard from "./expense-card"
 import useExpenseInfinite from "../services/use-expense-infinite"
 
-// Definimos el tipo exactamente como tú lo quieres: con OBJETO, no array
-export type ExpenseRowData = {
-  id: string
-  description: string
-  amount: number
-  date_time: string
-  additional_notes: string | null
-  categories: { name: string } | null // Sin corchetes []
-}
-
 export function ExpenseList() {
 
   const { items, loading, hasMore, loaderRef, removeItem } = useExpenseInfinite()

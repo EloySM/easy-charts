@@ -13,7 +13,7 @@ export default async function Page() {
     .from('categories')
     .select('*', { count: 'exact', head: true})
     .eq('user_id', authData.user?.id)
-    .eq('is_active', true)
+    .is('deleted_at', null)
 
   const LIMIT = 15
   const isLimitReached = (count ?? 0) >= LIMIT

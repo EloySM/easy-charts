@@ -8,12 +8,15 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import deleteCategory from "../services/delete-category";
 
 interface CategoryCardProps {
   category: CategoryCardData
 }
 
-export default function CategoryCard({ category } : CategoryCardProps) {
+export default function CategoryCard({ category, onDelete } : { category: CategoryCardData, onDelete?: (id: string) => void}) {
   const remaining = category.monthly_limit - category.spent
   const over = remaining < 0  // Si el el dinero restante es menor que 0
   const exact = remaining === 0 // Si el dinero restante es igual a 0
@@ -22,6 +25,23 @@ export default function CategoryCard({ category } : CategoryCardProps) {
     name: category.name,
     budget: category.monthly_limit.toString()
   })
+
+  const router = useRouter()
+    const [isPending, startTransition] = useTransition()
+  
+    const handleDelete = async () => {
+      // 1. Creamos el FormData manualmente
+      const formData = new FormData()
+      formData.append('category-id', category.id)
+  
+      // 2. Ejecutamos la acción dentro de startTransition
+      startTransition(async () => {
+        await deleteCategory(formData)
+        if(onDelete) onDelete(category.id)
+        router.refresh() 
+      })
+    }
+
   return (
     <Card className="group flex flex-col justify-between transition duration-300 hover:shadow-md">
       <CardHeader className="space-y-3">
@@ -91,13 +111,6 @@ export default function CategoryCard({ category } : CategoryCardProps) {
           )}
         </div>
 
-        {/* <Link
-          href={`/categories/${category.id}/edit`}
-          className="flex items-center gap-1 font-medium text-primary hover:text-primary/80 opacity-0 group-hover:opacity-100 transition-all duration-300"
-        >
-          <IconEdit className="size-3.5" />
-          Edit
-        </Link> */}
         <div className="transition-all duration-300 opacity-0 group-hover:opacity-100 has-[button[data-state=open]]:opacity-100"> {/* Con has lo que se haces es hacer referencia un elemento hijo */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -123,9 +136,9 @@ export default function CategoryCard({ category } : CategoryCardProps) {
               variant='destructive'
               onSelect={(e) => {
                 e.preventDefault()
-                // handleDelete()
+                handleDelete()
               }}
-              // disabled={isPending}
+              disabled={isPending}
               className="cursor-pointer"
             >
               <IconTrash/>

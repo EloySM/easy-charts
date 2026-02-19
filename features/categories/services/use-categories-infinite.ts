@@ -147,6 +147,10 @@ export default function useCategoriesInfinite() {
     return () => observer.disconnect()
   }, [loadMore])
 
-  return { items, loading, hasMore, loaderRef }
+  const removeItem = useCallback((id: string) => {
+     setItems((prev) => prev.filter(item => item.id !== id));  // Si el id es diferente al que quiero eliminar entonces no se añade
+  }, []);
+  
+  return { items, loading, hasMore, loaderRef, removeItem }
 
 }

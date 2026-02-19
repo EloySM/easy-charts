@@ -4,13 +4,17 @@ import CategoryCard from "./category-card"
 import useCategoriesInfinite from "../services/use-categories-infinite"
 
 export default function CategoriesList() {
-  const { items, loading, hasMore, loaderRef } = useCategoriesInfinite()
+  const { items, loading, hasMore, loaderRef, removeItem } = useCategoriesInfinite()
 
   return (
     <div className="@container/main w-full max-w-screen-2xl">
       <div className="grid grid-cols-1 gap-6 @xl/main:grid-cols-2 @4xl/main:grid-cols-3">
         {items.map((c) => (
-          <CategoryCard key={c.id} category={c} />
+          <CategoryCard 
+            key={c.id} 
+            category={c} 
+            onDelete={removeItem}
+          />
         ))}
       </div>
       
