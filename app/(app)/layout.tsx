@@ -26,7 +26,7 @@ export default function RootLayout({
         
         <main className="@container/main w-full p-2 bg-sidebar">
           <div className="rounded-xl min-h-screen bg-background border">
-            <SiteHeader/>
+            <SiteHeader/> 
             
             <div className="p-6 md:p-8 lg:p-12">
               {children}
