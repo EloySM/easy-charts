@@ -24,7 +24,7 @@ export default function RootLayout({
       <SidebarProvider>
         <AppSidebarWithUser />
         
-        <main className="@container/main w-full p-3 bg-sidebar">
+        <main className="@container/main w-full p-2 bg-sidebar">
           <div className="rounded-xl min-h-screen bg-background border">
             <SiteHeader/>
             

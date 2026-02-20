@@ -72,7 +72,7 @@ export function AppSidebar({ user, ...props }: React.ComponentProps<typeof Sideb
 
           {/* Quick Create Button */}
           <SidebarMenuItem className="mt-4">
-            <Link href="/categories/new-category" className="w-full">
+            <Link href="/ai" className="w-full">
               <Button 
                 variant="default"
                 size="sm"

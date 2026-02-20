@@ -8,11 +8,29 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Field, FieldDescription, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { login } from "@/app/auth/actions";
+import { createClient } from "@/lib/supabase/client";
 
 export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string>("");
   const router = useRouter();
+
+  async function logInWithGoogle() {
+      setLoading(true)
+      const supabase = await createClient()
+  
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`
+        }
+      })
+  
+      if(error) {
+        setError(error.message)
+        setLoading(false)
+      }
+    }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -92,7 +110,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
                   {loading ? "Logging in..." : "Login"}
                 </Button>
                 {/* Aquí podrías añadir un onClick para login con Google más tarde */}
-                <Button variant="outline" type="button" disabled={loading} className="w-full">
+                <Button variant="outline" type="button" disabled={loading} className="w-full" onClick={logInWithGoogle}>
                   Login with Google
                 </Button>
                 <FieldDescription className="text-center">

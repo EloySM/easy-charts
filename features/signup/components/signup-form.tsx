@@ -11,11 +11,29 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { signup } from "@/app/auth/actions"; // Importamos tu acción
+import { createClient } from "@/lib/supabase/client";
 
 export function SignupForm({ className, ...props }: React.ComponentProps<typeof Card>) {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string>("");
   const [isRegistered, setIsRegistered] = React.useState(false);
+
+  async function signInWithGoogle() {
+    setLoading(true)
+    const supabase = await createClient()
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`
+      }
+    })
+
+    if(error) {
+      setError(error.message)
+      setLoading(false)
+    }
+  }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -115,7 +133,7 @@ export function SignupForm({ className, ...props }: React.ComponentProps<typeof 
               <Button type="submit" disabled={loading}>
                 {loading ? "Creating Account..." : "Create Account"}
               </Button>
-              <Button variant="outline" type="button" disabled={loading}>
+              <Button variant="outline" type="button" disabled={loading} onClick={signInWithGoogle}>
                 Sign up with Google
               </Button>
               <p className="text-sm text-center text-muted-foreground mt-2">

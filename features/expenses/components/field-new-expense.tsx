@@ -27,7 +27,6 @@ export default async function FieldNewExpense() {
   const { data: categories, error } = await supabase
     .from("categories")
     .select("id, name")
-    .eq("is_active", true)
     .order("name")
 
   if (error) {
