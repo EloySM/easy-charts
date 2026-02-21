@@ -2,9 +2,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-/**
- * Función Proxy para gestionar la sesión y las redirecciones.
- */
 export async function proxy(request: NextRequest) {
   let response = NextResponse.next({
     request: { headers: request.headers },
@@ -12,9 +9,9 @@ export async function proxy(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname
 
-  // --- 1. EXCEPCIÓN DE RUTA DE AUTH ---
-  // Si la ruta es de autenticación, dejamos pasar la petición sin validar usuario.
-  // Esto evita que el código de Google (?code=...) rebote a la landing.
+  // --- 1. EXCEPCIÓN DE RUTAS DE AUTH ---
+  // Permitir que las rutas de autenticación pasen sin validación
+  // Esto incluye /auth/callback donde se procesa el login de Google
   if (pathname.startsWith('/auth')) {
     return response
   }
@@ -40,24 +37,25 @@ export async function proxy(request: NextRequest) {
     }
   )
 
-  // Obtenemos el usuario actual
+  // IMPORTANTE: Refrescar la sesión antes de obtener el usuario
+  // Esto asegura que las cookies se procesen correctamente
+  const { data: { session } } = await supabase.auth.getSession()
   const { data: { user } } = await supabase.auth.getUser()
 
   // --- 2. CONFIGURACIÓN DE REDIRECCIONES ---
   
-  // Definimos qué es una ruta pública
+  // Rutas públicas que no requieren autenticación
   const isPublicRoute = pathname === '/' || pathname === '/login' || pathname === '/signup'
   
-  // Definimos qué es una ruta de la App (protegida)
-  // Ignoramos archivos con punto (.) y rutas de sistema de Next (_next)
+  // Rutas protegidas de la aplicación
   const isAppRoute = !isPublicRoute && !pathname.startsWith('/_next') && !pathname.includes('.')
 
-  // REGLA A: Si el usuario ya está logueado y trata de ir a Login/Landing -> Enviarlo a /home
+  // REGLA A: Usuario logueado en ruta pública -> redirigir a /home
   if (user && isPublicRoute) {
     return NextResponse.redirect(new URL('/home', request.url))
   }
 
-  // REGLA B: Si NO hay usuario y trata de entrar a la App -> Enviarlo al Login
+  // REGLA B: Usuario no logueado en ruta protegida -> redirigir a /login
   if (!user && isAppRoute) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
@@ -65,19 +63,15 @@ export async function proxy(request: NextRequest) {
   return response
 }
 
-/**
- * Configuración del Matcher para que Next.js ejecute la función proxy.
- * Aunque uses el nombre 'proxy', Next.js requiere exportar 'middleware' por defecto
- * o configurar el motor para que lo reconozca. Si tu framework busca 'proxy', aquí está:
- */
-export const middleware = proxy; 
-
 export const config = {
   matcher: [
-    /*
-     * Excluimos explícitamente rutas estáticas y el callback de auth
-     * para que el proceso de Google sea fluido.
+    /**
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - public folder
      */
-    '/((?!_next/static|_next/image|favicon.ico|auth/callback|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 }
