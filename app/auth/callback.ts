@@ -22,5 +22,5 @@ export async function GET(request: Request) {
   }
 
   // Si algo falla (código inválido o error), mandamos a una página de error o al login
-  return NextResponse.redirect(`${origin}/login?error=No se pudo verificar la cuenta`)
+  return NextResponse.redirect(`https://spency.app/login?error=No se pudo verificar la cuenta`)
 }
