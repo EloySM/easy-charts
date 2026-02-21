@@ -5,7 +5,6 @@ import { NextResponse } from 'next/server'
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
-  const next = '/home'
 
   if (!code) {
     return NextResponse.redirect(`${origin}/login?error=no_code`)
@@ -13,8 +12,8 @@ export async function GET(request: Request) {
 
   const cookieStore = await cookies()
   
-  // Creamos la respuesta base (aún no es redirect, para poder modificar cookies)
-  const response = NextResponse.redirect(`${origin}${next}`)
+  // Crear respuesta de redirección a home
+  const response = NextResponse.redirect(`${origin}/home`)
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -25,7 +24,7 @@ export async function GET(request: Request) {
           return cookieStore.getAll()
         },
         setAll(cookiesToSet) {
-          // Solo seteamos en la respuesta, NO en cookieStore (es read-only aquí)
+          // Solo modificar la respuesta, no el cookieStore
           cookiesToSet.forEach(({ name, value, options }) => {
             response.cookies.set(name, value, options)
           })
@@ -34,13 +33,19 @@ export async function GET(request: Request) {
     }
   )
 
-  const { error } = await supabase.auth.exchangeCodeForSession(code)
+  try {
+    const { error } = await supabase.auth.exchangeCodeForSession(code)
+    
+    if (error) {
+      console.error('Exchange error:', error)
+      return NextResponse.redirect(`${origin}/login?error=exchange_failed`)
+    }
 
-  if (error) {
-    console.error('Error exchanging code:', error)
-    return NextResponse.redirect(`${origin}/login?error=auth_callback_failed`)
+    // Éxito - devolver respuesta con cookies seteadas
+    return response
+    
+  } catch (err) {
+    console.error('Exception:', err)
+    return NextResponse.redirect(`${origin}/login?error=exception`)
   }
-
-  // Devolvemos la respuesta con las cookies ya seteadas por setAll
-  return response
 }
