@@ -24,7 +24,7 @@ export async function createCategory(formData: FormData) {
     .from('categories')
     .select('*', { count: 'exact', head: true })
     .eq('user_id', authData.user.id)
-    .eq('is_active', true)
+    .is('deleted_at', null)
 
   if (countError) throw new Error('Error checking category limit')
 

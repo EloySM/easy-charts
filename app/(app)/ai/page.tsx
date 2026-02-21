@@ -72,13 +72,13 @@ export default function DashboardPro() {
     loadData()
   }, [])
 
-  if (loading) return <div className="p-10 text-white animate-pulse">Consultando base de datos y preparando análisis...</div>
+  if (loading) return <div className="p-10 text-white animate-pulse">Consulting the data base and preparing analysis...</div>
 
   return (
     <div className="p-8 max-w-6xl mx-auto space-y-10">
       <header>
-        <h1 className="text-3xl font-bold text-white">Resumen Inteligente</h1>
-        <p className="text-zinc-500">Análisis comparativo de tus gastos</p>
+        <h1 className="text-3xl font-bold text-white">Smart Summary</h1>
+        <p className="text-zinc-500">Comparative analysis of your expenses</p>
       </header>
 
       {/* BLOQUES DE RESUMEN CON ANÁLISIS INDIVIDUAL */}
@@ -86,7 +86,7 @@ export default function DashboardPro() {
         <div className="flex flex-col gap-4">
           <StatCard title="Semanal (7d)" data={data.s7} color="text-blue-400" />
           <div className="bg-blue-500/5 border border-blue-500/20 p-4 rounded-xl text-xs text-blue-200 min-h-[80px]">
-            <span className="font-bold block mb-1">IA 7 Días:</span>
+            <span className="font-bold block mb-1">IA 7 Days:</span>
             {aiAdvice?.analisis_7d || "Generando..."}
           </div>
         </div>
@@ -94,7 +94,7 @@ export default function DashboardPro() {
         <div className="flex flex-col gap-4">
           <StatCard title="Mensual (30d)" data={data.s30} color="text-indigo-400" />
           <div className="bg-indigo-500/5 border border-indigo-500/20 p-4 rounded-xl text-xs text-indigo-200 min-h-[80px]">
-            <span className="font-bold block mb-1">IA 30 Días:</span>
+            <span className="font-bold block mb-1">IA 30 Days:</span>
             {aiAdvice?.analisis_30d || "Generando..."}
           </div>
         </div>
@@ -102,7 +102,7 @@ export default function DashboardPro() {
         <div className="flex flex-col gap-4">
           <StatCard title="Trimestral (90d)" data={data.s90} color="text-emerald-400" />
           <div className="bg-emerald-500/5 border border-emerald-500/20 p-4 rounded-xl text-xs text-emerald-200 min-h-[80px]">
-            <span className="font-bold block mb-1">IA 90 Días:</span>
+            <span className="font-bold block mb-1">IA 90 Days:</span>
             {aiAdvice?.analisis_90d || "Generando..."}
           </div>
         </div>
@@ -114,7 +114,7 @@ export default function DashboardPro() {
             <h3 className="text-yellow-500 font-bold text-sm uppercase mb-4 tracking-widest">Conclusión General</h3>
             <p className="text-xl text-zinc-100 mb-6">{aiAdvice.comparativa}</p>
             <div className="bg-yellow-500/10 border border-yellow-500/20 p-4 rounded-2xl text-yellow-200">
-                <strong>💡 Acción inmediata:</strong> {aiAdvice.consejo_urgente}
+                <strong>💡 Immediate action:</strong> {aiAdvice.consejo_urgente}
             </div>
         </section>
       )}
@@ -132,8 +132,8 @@ function StatCard({ title, data, color }: StatCardProps) {
         <span className={`text-4xl font-black ${color}`}>{total}€</span>
       </div>
       <div className="mt-4 pt-4 border-t border-zinc-800 flex justify-between text-xs text-zinc-500">
-        <span>{data?.tx_count || 0} operaciones</span>
-        <span>Media: {Math.round(total / txCount)}€</span>
+        <span>{data?.tx_count || 0} operations</span>
+        <span>Average: {Math.round(total / txCount)}€</span>
       </div>
     </div>
   )

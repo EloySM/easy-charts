@@ -17,7 +17,7 @@ Debes devolver UNICAMENTE un objeto JSON con este formato:
   "comparativa": "Tendencia entre los tres periodos",
   "consejo_urgente": "Acción para ahorrar hoy"
 }
-Usa los datos de transacciones y categorías para ser específico. Responde en español.
+Usa los datos de transacciones y categorías para ser específico. Responde en ingles.
 `;
 
 export async function POST(req: Request) {

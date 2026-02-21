@@ -17,7 +17,7 @@ import {
 import Link from "next/link"
 import { createCategory } from "../services/create-category"
 
-export function FieldCategory() {
+export function FieldNewCategory() {
   return (
     <div className="w-full max-w-md mx-auto">
       <form action={createCategory}>
