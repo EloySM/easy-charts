@@ -2,9 +2,38 @@
 import { useState, useEffect } from "react"
 import { getDetailedStatsForAI } from "./actions"
 
+// Estructura que devuelve getDetailedStatsForAI
+interface StatsPeriod {
+  total: number;
+  tx_count: number;
+}
+
+// Estructura que guarda el estado 'data'
+interface DashboardData {
+  s7: StatsPeriod | null;
+  s30: StatsPeriod | null;
+  s90: StatsPeriod | null;
+}
+
+// Estructura que devuelve tu API de IA
+interface AIAdvice {
+  analisis_7d: string;
+  analisis_30d: string;
+  analisis_90d: string;
+  comparativa: string;
+  consejo_urgente: string;
+}
+
+// 3. Tipamos las props de StatCard
+interface StatCardProps {
+  title: string;
+  data: StatsPeriod | null;
+  color: string;
+}
+
 export default function DashboardPro() {
-  const [data, setData] = useState<any>({ s7: null, s30: null, s90: null })
-  const [aiAdvice, setAiAdvice] = useState<any>(null)
+  const [data, setData] = useState<DashboardData>({ s7: null, s30: null, s90: null })
+  const [aiAdvice, setAiAdvice] = useState<AIAdvice | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -93,7 +122,7 @@ export default function DashboardPro() {
   )
 }
 
-function StatCard({ title, data, color }: any) {
+function StatCard({ title, data, color }: StatCardProps) {
   const total = data?.total || 0
   const txCount = data?.tx_count || 1
   return (

@@ -1,5 +1,6 @@
 import { FieldCategory } from '@/features/categories/components/field-category'
 import { Card } from '@/components/ui/card'
+import { Suspense } from 'react'
 
 export default function Page() {
 
@@ -10,7 +11,9 @@ export default function Page() {
           New Category
         </h1>
 
-        <FieldCategory/>
+        <Suspense fallback={<div>Cargando</div>}>
+          <FieldCategory/>
+        </Suspense>
 
       </Card>
     </div>

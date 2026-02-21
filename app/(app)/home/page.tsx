@@ -16,7 +16,7 @@ export default async function Page() {
     className='flex flex-col items-center'
   >
     <div
-       className='w-full grid md:grid-cols-2 gap-10 mt-0 grid-cols-1'
+       className='w-full grid md:grid-cols-2 gap-10 grid-cols-1'
       >
         <ChartPieDonutText data={dataAnual} period={'year'} />
         <ChartPieDonutText data={dataMensual} period={'month'} />
