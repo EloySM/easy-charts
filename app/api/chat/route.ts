@@ -8,7 +8,7 @@ const openai = new OpenAI({
 
 // 1. Pones la constante aquí, fuera de la función POST
 const systemPrompt = `
-Eres un analista financiero de precisión. Vas a recibir un JSON con datos de 3 periodos: 7, 30 y 90 días.
+Eres un analista financiero de precisión. Vas a recibir un JSON con datos de 3 periodos: 7, 30 y 90 días reponde en dolares americanos.
 Debes devolver UNICAMENTE un objeto JSON con este formato:
 {
   "analisis_7d": "string breve",

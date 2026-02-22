@@ -22,7 +22,7 @@ export default function FieldEditCategory({ id, initialData }: FieldEditCategory
           <FieldGroup>
             <Field>
               <FieldLabel>Name</FieldLabel>
-              <Input name="category-name" defaultValue={initialData.name.replace('_', ' ')}/>
+              <Input name="category-name" defaultValue={initialData.name.replace(/_/g, ' ')}/>
             </Field>
             <Field>
               <FieldLabel>Budget</FieldLabel>

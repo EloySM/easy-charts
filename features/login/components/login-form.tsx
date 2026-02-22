@@ -22,7 +22,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `https://spency.app/auth/callback`        }
+          redirectTo: `${location.origin}/auth/callback`        }
       })
   
       if(error) {

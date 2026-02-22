@@ -208,7 +208,7 @@ export function ChartAreaInteractive({initialData}: {initialData: ChartDataPoint
               {/* Área del año actual (arriba) */}
               <Area
                 dataKey="currentYear"
-                type="monotone"
+                type="natural"
                 fill="url(#fillCurrentYear)"
                 stroke="var(--color-currentYear)"
                 stackId="b"
@@ -217,7 +217,7 @@ export function ChartAreaInteractive({initialData}: {initialData: ChartDataPoint
               {/* Área del año pasado (abajo) */}
               <Area
                 dataKey="lastYear"
-                type="monotone"
+                type="natural"
                 fill="url(#fillLastYear)"
                 stroke="var(--color-lastYear)"
                 stackId="a"
