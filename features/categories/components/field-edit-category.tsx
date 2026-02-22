@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { FieldSet, FieldGroup, Field, FieldLabel } from "@/components/ui/field";
+import { FieldSet, FieldGroup, Field, FieldLabel, FieldSeparator } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import editCategory from "../services/edit-category";
+import Link from "next/link";
 
 interface FieldEditCategoryProps{
   id: string
@@ -28,7 +29,17 @@ export default function FieldEditCategory({ id, initialData }: FieldEditCategory
               <FieldLabel>Budget</FieldLabel>
               <Input name="category-budget" type="number" defaultValue={`${initialData.budget}`}/>
             </Field>
-            <Button type="submit">Update</Button>
+
+            <FieldSeparator/>
+            
+            <Field>
+              <Button type="submit">Update</Button>
+              <Link href="/categories">
+              <Button className="w-full" variant="outline" type="button">
+                Cancel
+              </Button>
+            </Link>
+            </Field>
           </FieldGroup>
         </FieldSet>
       </form>

@@ -25,7 +25,7 @@ export function SignupForm({ className, ...props }: React.ComponentProps<typeof 
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `https://spency.app/auth/callback`
+        redirectTo: `${window.location.origin}/auth/callback`
       }
     })
 

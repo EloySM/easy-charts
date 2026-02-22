@@ -1,4 +1,4 @@
-import { FieldSet, FieldGroup, Field, FieldLabel } from "@/components/ui/field";
+import { FieldSet, FieldGroup, Field, FieldLabel, FieldSeparator } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { InputGroup, InputGroupAddon, InputGroupText, InputGroupInput } from "@/components/ui/input-group";
 import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
@@ -7,6 +7,7 @@ import { Calendar22 } from "./calendar22";
 import { supabaseServer } from "@/lib/supabase/server";
 import editExpense from "../services/edit-expense";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 // 1. Definimos la interfaz con los nombres exactos que vienen de la URL
 interface FieldEditExpenseProps {
@@ -102,9 +103,16 @@ export default async function FieldEditExpense({ id, initialData }: FieldEditExp
               />
             </Field>
 
-            <Button type="submit">
-              Update
-            </Button>
+            <FieldSeparator/>
+
+            <Field>
+              <Button type="submit">
+                Update
+              </Button>
+              <Link href={'/expenses'}>
+                  <Button className="w-full" variant={"outline"}>Cancel</Button>
+              </Link>
+            </Field>
           </FieldGroup>
         </FieldSet>
       </form>
