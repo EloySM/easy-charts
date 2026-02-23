@@ -83,7 +83,7 @@ export default function Page() {
             <motion.button
               layoutId="img-hero"
               transition={smoothTransition}
-              onClick={() => setSelectedImg({src: "/more.png", alt: "Spency dashboard showing expense tracking and analytics", id: "img-hero"})}
+              onClick={() => setSelectedImg({src: "/more-v2.png", alt: "Spency dashboard showing expense tracking and analytics", id: "img-hero"})}
               className="relative aspect-video w-full overflow-visible cursor-pointer rounded-2xl group"
               aria-label="View full dashboard preview"
             >
