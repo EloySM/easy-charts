@@ -2,6 +2,11 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NODE_ENV === 'production' 
+      ? 'https://spency.app' 
+      : 'http://localhost:3000'
+  ),
   title: 'Spency - Simple Expense Tracking | Your Finances, No Noise',
   description: 'Control every cent with Spency. Log expenses in under 2 seconds, visualize spending with clear analytics, and keep your financial data private and secure.',
   keywords: ['expense tracker', 'personal finance', 'budget app', 'spending tracker', 'financial control', 'money management'],
