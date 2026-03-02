@@ -7,6 +7,9 @@ export const metadata: Metadata = {
       ? 'https://spency.app' 
       : 'http://localhost:3000'
   ),
+  icons: {
+    icon: '/favicon.svg',
+  },
   title: 'Spency - Simple Expense Tracking | Your Finances, No Noise',
   description: 'Control every cent with Spency. Log expenses in under 2 seconds, visualize spending with clear analytics, and keep your financial data private and secure.',
   keywords: ['expense tracker', 'personal finance', 'budget app', 'spending tracker', 'financial control', 'money management'],
@@ -46,9 +49,5 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  },
-  verification: {
-    google: 'your-google-verification-code', // Añade cuando tengas
-    // yandex: 'yandex-verification-code',
-  },
+  }
 }
